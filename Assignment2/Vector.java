@@ -37,7 +37,7 @@ public class Vector {
     /**
      * returns a LinkedList at an index
      * @param index index to retrieve from
-     * @return
+     * @return a LinkedList
      */
     public LinkedList get(int index) {
         try {

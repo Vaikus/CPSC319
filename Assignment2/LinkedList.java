@@ -40,7 +40,7 @@ public class LinkedList {
      * @param data to add.
      * @param index at index.
      */
-    public void add(Object data, int index) {
+    public void add(Object data, int index) throws NullPointerException {
         Node tempNode = new Node(data);
         Node currentNode = head;
         if (head == null) head = tempNode;
