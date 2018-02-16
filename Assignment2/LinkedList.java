@@ -1,13 +1,26 @@
 package Assignment2;
 
+/**
+ * Incredibly oversimplified LinkedList implementation.
+ *
+ * @author Bryn Meekel
+ */
 public class LinkedList {
     private int counter;
     private Node head;
 
+    /**
+     * returns the size of the Linked List
+     * @return the size of the linked list.
+     */
     public int getCounter() {
         return counter;
     }
 
+    /**
+     * Adds an object to the linked list at the end of the list.
+     * @param data to add.
+     */
     public void add(Object data) {
         if(head == null) {
             head = new Node(data);
@@ -22,6 +35,11 @@ public class LinkedList {
         counter++;
     }
 
+    /**
+     * Adds an object to the linked list at the index provided.
+     * @param data to add.
+     * @param index at index.
+     */
     public void add(Object data, int index) {
         Node tempNode = new Node(data);
         Node currentNode = head;
@@ -39,6 +57,11 @@ public class LinkedList {
         counter++;
     }
 
+    /**
+     * retrieves the object at the index.
+     * @param index to retrieve
+     * @return an object at index.
+     */
     public Object get(int index){
         if(index < 0) return null;
         Node currentNode = head;
@@ -52,6 +75,11 @@ public class LinkedList {
         return currentNode.getData();
     }
 
+    /**
+     * changes the object at the index to the newly provided object.
+     * @param data to add
+     * @param index at index
+     */
     public void set(Object data, int index){
         if(index < 0) return;
         Node currentNode = head;
@@ -66,6 +94,10 @@ public class LinkedList {
         currentNode.setData(data);
     }
 
+    /**
+     * removes an object at an index
+     * @param index at index
+     */
     public void remove(int index){
         if (index < 1 || index > counter) return;
         Node currentNode = head;
@@ -79,6 +111,9 @@ public class LinkedList {
         }
     }
 
+    /**
+     * Sorts the Linked List according to a lexicographic sort of each Object's toString function
+     */
     public void InsertionSort() {
         Node currentNode = head;
         Node tailNode = null;
@@ -97,6 +132,9 @@ public class LinkedList {
         }
     }
 
+    /**
+     * Private subclass to implement the concept of a Node on a list.
+     */
     private class Node implements Comparable{
         Node next;
         Object data;

@@ -1,5 +1,12 @@
 package Assignment2;
 
+
+/**
+ * Incredibly oversimplified Vector class. Only handles references to linked list, and does not include usual components
+ * of a vector such as thread safety, and stack-like options such as pushing and popping.
+ *
+ * @author Bryn Meekel
+ */
 public class Vector {
     private int capacity;
     private int size;
@@ -12,6 +19,11 @@ public class Vector {
         vector = new LinkedList[capacity];
     }
 
+    /**
+     * Save a reference to a LinkedList at the desired index.
+     * @param list LinkedList reference.
+     * @param index index.
+     */
     public void store(LinkedList list, int index){
         try {
             if(index < size) set(list, index);
@@ -22,6 +34,11 @@ public class Vector {
         }
     }
 
+    /**
+     * returns a LinkedList at an index
+     * @param index index to retrieve from
+     * @return
+     */
     public LinkedList get(int index) {
         try {
             return vector[index];

@@ -17,21 +17,9 @@ public class Main {
 
         long startTime = System.nanoTime();
         while((str = in != null ? in.readLine() : null) != null){
-            char[] sortedInput = str.toCharArray();
-            char[] testCase;
-            QuickSort.sort(sortedInput);
             boolean foundMatch = false;
             if(linkedLists.get(0) != null) {
-                for (int iterator = 0; iterator < linkedLists.getSize(); iterator++) {
-                    testCase = linkedLists.get(iterator).get(0).toString().toCharArray();
-                    if(testCase.length != sortedInput.length) continue;
-                    QuickSort.sort(testCase);
-                    if(Arrays.equals(testCase, sortedInput)){
-                        linkedLists.get(iterator).add(str);
-                        foundMatch = true;
-                        break;
-                    }
-                }
+                foundMatch = testForAnagram(linkedLists, str);
             }
             if(!foundMatch) {
                 LinkedList list = new LinkedList();
@@ -55,5 +43,21 @@ public class Main {
         outputWriter.close();
 
         System.out.println("The sorting algorithm took " +(endTime - startTime)/1000000 + " milliseconds.");
+    }
+
+    private static boolean testForAnagram(Vector linkedLists, String str) {
+        char[] testCase;
+        char[] sortedInput = str.toCharArray();
+        QuickSort.sort(sortedInput);
+        for (int iterator = 0; iterator < linkedLists.getSize(); iterator++) {
+            testCase = linkedLists.get(iterator).get(0).toString().toCharArray();
+            if(testCase.length != sortedInput.length) continue;
+            QuickSort.sort(testCase);
+            if(Arrays.equals(testCase, sortedInput)){
+                linkedLists.get(iterator).add(str);
+                 return true;
+            }
+        }
+        return false;
     }
 }
