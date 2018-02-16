@@ -4,17 +4,18 @@ public class Vector {
     private int capacity;
     private int size;
     private LinkedList[] vector;
-    private static final int INCREMENT_FACTOR = 5;
+    private static final double INCREMENT_FACTOR = 2;
 
     Vector(){
         this.size = 0;
-        this.capacity = INCREMENT_FACTOR;
+        this.capacity = 1;
         vector = new LinkedList[capacity];
     }
 
     public void store(LinkedList list, int index){
         try {
-            set(list, index);
+            if(index < size) set(list, index);
+            else throw new IndexOutOfBoundsException();
         } catch (IndexOutOfBoundsException indexOutOfBounds) {
             if (index >= 0) add(list, index);
             if (index >= capacity) throw new IndexOutOfBoundsException();
@@ -29,21 +30,18 @@ public class Vector {
         }
     }
 
-    public void set(LinkedList list, int index){
+    private void set(LinkedList list, int index){
         vector[index] = list;
     }
 
-    public void add(LinkedList list, int index){
+    private void add(LinkedList list, int index){
         LinkedList[] temporary;
-        if(index >= 0 && index >= capacity) capacity = capacity + INCREMENT_FACTOR;
+        if(index >= 0 && index >= capacity) capacity = (int)(capacity * INCREMENT_FACTOR);
         temporary = new LinkedList[capacity];
-        for(int iterator = 0; iterator < vector.length; iterator++)
-            temporary[iterator] = vector[iterator];
+        System.arraycopy(vector, 0, temporary, 0, vector.length);
         vector = new LinkedList[capacity];
-        for(int iterator = 0; iterator < vector.length; iterator++)
-            vector[iterator] = temporary[iterator];
-        for(int iterator = index; iterator < size; iterator++)
-            vector[iterator+1] = temporary[iterator];
+        System.arraycopy(temporary, 0, vector, 0, vector.length);
+        System.arraycopy(temporary, index, vector, index + 1, size - index);
         vector[index] = list;
         size++;
     }
